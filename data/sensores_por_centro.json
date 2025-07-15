@@ -1,0 +1,201 @@
+
+{
+  "trafun": {
+    "MEE": [
+      "Flujómetro pozo 1",
+      "Flujómetro tubería 1-8",
+      "Nivel pozo 1"
+    ],
+    "Efluente": [
+      "Efluente",
+      "NTU efluente"
+    ],
+    "Turbidez y CO2": [
+      "Temperatura módulo 200",
+      "Temperatura módulo 300",
+      "Temperatura módulo 400",
+      "Temperatura alevinaje",
+      "NTU módulo 200",
+      "NTU módulo 300",
+      "NTU módulo 400",
+      "NTU alevinaje",
+      "CO2 módulo 200",
+      "CO2 módulo 300",
+      "CO2 módulo 400",
+      "CO2 alevinaje"
+    ]
+  },
+  "cipreses": {
+    "MEE": [
+      "Flujómetro pozo 2",
+      "Flujómetro pozo 3",
+      "Flujómetro pozo 4",
+      "Flujómetro pozo 5",
+      "Flujómetro pozo 6",
+      "Flujómetro pozo 8",
+      "Nivel pozo 2",
+      "Nivel pozo 3",
+      "Nivel pozo 4",
+      "Nivel pozo 5",
+      "Nivel pozo 6",
+      "Nivel pozo 8"
+    ],
+    "Turbidez y CO2": [
+      "Conductividad sala 100",
+      "Conductividad sala 200",
+      "Conductividad sala 300",
+      "Conductividad sala 400",
+      "Temperatura sala 100",
+      "Temperatura sala 200",
+      "Temperatura sala 300",
+      "Temperatura sala 400",
+      "pH sala 100",
+      "pH sala 200",
+      "pH sala 300",
+      "pH sala 400",
+      "Redox sala 300",
+      "Redox sala 400",
+      "Salinidad sala 100",
+      "Salinidad sala 200",
+      "Salinidad sala 300",
+      "Salinidad sala 400",
+      "Turbidez sala 100",
+      "Turbidez sala 200",
+      "Turbidez sala 300",
+      "Turbidez sala 400"
+    ],
+    "Makeup": [
+      "Flujómetro agua dulce",
+      "Flujómetro agua salada"
+    ],
+    "Incubación": [
+      "Parámetros sala 1",
+      "Parámetros sala 2"
+    ],
+    "Abiótico": [
+      "Rebalse incubación"
+    ]
+  },
+  "liquine": {
+    "MEE": [
+      "Flujómetro pozo 1",
+      "Flujómetro pozo 2",
+      "Nivel pozo 1",
+      "Nivel pozo 2",
+      "Afluente",
+      "Efluente",
+      "Canales"
+    ],
+    "Abiótico": [
+      "Conductividad",
+      "pH",
+      "Temperatura",
+      "Salinidad",
+      "Parámetros de incubación"
+    ]
+  },
+  "rahue": {
+    "MEE": [
+      "Flujómetro pozo 1",
+      "Flujómetro pozo 2",
+      "Flujómetro pozo 3",
+      "Flujómetro pozo 4",
+      "Nivel pozo 1",
+      "Nivel pozo 2",
+      "Nivel pozo 3",
+      "Nivel pozo 4",
+      "Afluente/Efluente"
+    ],
+    "Turbidez y CO2": [
+      "NTU FRY",
+      "CO2 FRY",
+      "Temperatura FRY",
+      "Turbidez alevinaje",
+      "CO2 alevinaje",
+      "Temperatura alevinaje",
+      "Turbidez smolt 1",
+      "CO2 smolt 1",
+      "Temperatura smolt 1",
+      "Turbidez smolt 2",
+      "CO2 smolt 2",
+      "Temperatura smolt 2"
+    ]
+  },
+  "santa_juana": {
+    "MEE": [
+      "Flujómetro pozo 1",
+      "Flujómetro pozo 2",
+      "Flujómetro pozo 3",
+      "Nivel pozo 1",
+      "Nivel pozo 2",
+      "Nivel pozo 3"
+    ],
+    "Efluente": [
+      "Efluente",
+      "pH Efluente"
+    ],
+    "Turbidez y CO2": [
+      "NTU trick 1",
+      "CO2 trick 1",
+      "Temperatura trick 1",
+      "NTU trick 2",
+      "CO2 trick 2",
+      "Temperatura trick 2",
+      "NTU sump 1",
+      "CO2 sump 1",
+      "Temperatura sump 1",
+      "NTU sump 2",
+      "CO2 sump 2",
+      "Temperatura sump 2",
+      "CO2 estanque 7",
+      "CO2 estanque 15"
+    ]
+  },
+  "pcc": {
+    "Efluente": [
+      "Flujómetro Efluente",
+      "pH Efluente"
+    ],
+    "MEE": [
+      "Flujómetro pozo 1",
+      "Flujómetro pozo 2",
+      "Flujómetro pozo 3",
+      "Nivel pozo 1",
+      "Nivel pozo 2",
+      "Nivel pozo 3"
+    ],
+    "Monitoreo de Oxígeno": [
+      "Oxígeno estanque 1",
+      "Oxígeno estanque 2",
+      "Oxígeno estanque 3",
+      "Oxígeno estanque 4",
+      "Oxígeno estanque 5",
+      "Oxígeno estanque 6",
+      "Oxígeno estanque 7",
+      "Oxígeno estanque 8"
+    ],
+    "Turbidez y CO2": [
+      "CO2 estanque 1",
+      "NTU estanque 1",
+      "Temperatura estanque 1",
+      "CO2 estanque 5",
+      "NTU estanque 5",
+      "Temperatura estanque 5",
+      "CO2 estanque 6",
+      "NTU estanque 6",
+      "Temperatura estanque 6"
+    ]
+  },
+  "esperanza": {
+    "MEE": [
+      "Afluente (flujómetro)",
+      "Efluente (flujómetro)"
+    ]
+  },
+  "hueyusca": {
+    "MEE": [
+      "Afluente (flujómetro)",
+      "Efluente (flujómetro)"
+    ]
+  }
+}

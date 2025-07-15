@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "incidencias": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$incidencia_id": {
+        ".validate": "newData.hasChildren(['fechaHora', 'turno', 'centro', 'tipoIncidencia', 'tiempoResolucion', 'riesgoPeces', 'perdidaEconomica', 'riesgoPersonas', 'userId', 'userEmail']) && newData.child('userId').val() === auth.uid"
+      }
+    }
+  }
+}
