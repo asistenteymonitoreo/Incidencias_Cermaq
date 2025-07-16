@@ -11,7 +11,7 @@ body.login-page {
 }
 
 .login-container {
-    max-width: 400px;
+    max-width: 800px;
     width: 100%;
     background: #ffffff;
     padding: 40px;
@@ -123,7 +123,32 @@ body.form-page {
     box-sizing: border-box;
     position: relative;
     z-index: 1;
-    margin: 20px auto;
+        margin: 20px auto;
+}
+
+/* Estilos para el contenedor de mensajes del formulario */
+.form-message-container {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    text-align: center;
+    display: none; /* Oculto por defecto */
+    transition: opacity 0.5s ease;
+}
+
+.form-message-container.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.form-message-container.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
 }
 
 .form-container .form-logo {
@@ -373,6 +398,108 @@ body.form-page {
 
 /* Estilos para los botones de filtro */
 .filter-button {
+
+/* =================================================================== */
+/* ESTILOS PARA LA PÁGINA DE SELECCIÓN DE PERFIL (perfil.html)   */
+/* =================================================================== */
+
+.profile-selection-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px;
+}
+
+.profile-selection-card .title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.profile-item {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para el botón de Cerrar Sesión */
+.logout-button {
+    background-color: #dc3545; /* Color rojo para indicar una acción de salida */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px; /* Margen superior para separarlo */
+    display: block; /* Para que ocupe su propia línea */
+    width: fit-content; /* Para que el ancho se ajuste al contenido */
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Un rojo más oscuro al pasar el ratón */
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #009CA6;
+    border: 3px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.profile-item:hover .profile-avatar {
+    border-color: #009CA6;
+}
+
+.profile-name {
+    font-weight: 500;
+    color: #555;
+}
+
+.manage-profiles-button {
+    background-color: transparent;
+    border: 2px solid #ccc;
+    color: #777;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.manage-profiles-button:hover {
+    background-color: #009CA6;
+    border-color: #009CA6;
+    color: #fff;
+}
+
     background-color: #007bff; /* Un azul para los filtros */
     color: white;
     padding: 10px 20px;
@@ -397,7 +524,183 @@ body.form-page {
 .filter-button.reset-button:hover {
     background-color: #5a6268;
 }
+/* estilos_perfil.css */
 
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif; /* Usar una fuente moderna y legible */
+    background-color: #f0f2f5; /* Fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Incluir padding en el tamaño total */
+}
+
+.container {
+    width: 100%;
+    max-width: 700px; /* Ancho máximo para la tarjeta principal */
+    background-color: #ffffff;
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    padding: 40px; /* Más padding interno */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.header {
+    margin-bottom: 35px;
+}
+
+.logo-text {
+    font-family: 'Arial Black', sans-serif; /* Simula la tipografía del logo */
+    color: #007bff; /* Color azul/turquesa de Cermaq */
+    font-size: 2.5em; /* Tamaño del logo */
+    margin: 0;
+    letter-spacing: 2px; /* Espaciado entre letras */
+}
+
+.profile-selection-card {
+    /* No se necesitan estilos adicionales si ya es el .container */
+}
+
+.title {
+    color: #333; /* Color más oscuro para el título principal */
+    font-size: 2.2em;
+    margin-bottom: 45px; /* Más espacio debajo del título */
+    font-weight: 700; /* Más negrita */
+}
+
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Columnas responsivas */
+    gap: 25px; /* Espacio entre los perfiles */
+    margin-bottom: 40px;
+    justify-content: center; /* Centra los elementos si no llenan la cuadrícula */
+}
+
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    padding: 20px 10px; /* Padding ajustado */
+    border-radius: 10px;
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    background-color: #fbfbfb; /* Ligeramente diferente para el fondo de la card */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave para cada card */
+}
+
+.profile-item:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    border-color: #007bff; /* Color turquesa al hacer hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.2); /* Sombra con el color de Cermaq */
+}
+
+.profile-avatar {
+    width: 85px; /* Tamaño del avatar */
+    height: 85px;
+    background-color: #e0e6eb; /* Color de fondo para el avatar */
+    border-radius: 50%; /* Circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.2em; /* Tamaño del icono */
+    color: #6c757d; /* Color del icono */
+    margin-bottom: 12px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Pequeña sombra interna para profundidad */
+}
+
+.profile-avatar i {
+    color: inherit; /* Hereda el color del padre */
+}
+
+/* Estilo específico para el perfil "Agregar Perfil" */
+.add-profile .profile-avatar {
+    background-color: #007bff; /* Fondo turquesa para el botón de añadir */
+    color: #ffffff; /* Icono blanco */
+}
+
+.add-profile:hover .profile-avatar {
+    background-color: #0056b3; /* Un poco más oscuro al hacer hover */
+}
+
+.profile-name {
+    font-size: 1.1em;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.manage-profiles-button {
+    background-color: transparent;
+    border: 2px solid #007bff; /* Borde del color de Cermaq */
+    color: #007bff;
+    padding: 12px 30px;
+    border-radius: 25px; /* Más redondeado */
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: 20px; /* Espacio superior */
+    outline: none; /* Remueve el contorno al hacer clic */
+}
+
+.manage-profiles-button:hover {
+    background-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4); /* Sombra al hacer hover */
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        margin: 15px;
+    }
+    .title {
+        font-size: 1.8em;
+        margin-bottom: 35px;
+    }
+    .profiles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 15px;
+    }
+    .profile-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 2.8em;
+    }
+    .profile-name {
+        font-size: 1em;
+    }
+    .manage-profiles-button {
+        padding: 10px 25px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+    }
+    .title {
+        font-size: 1.6em;
+        margin-bottom: 30px;
+    }
+    .profiles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5em;
+    }
+}
 /* Estilos específicos para impresión (opcional, pero útil) */
 @media print {
     body {

@@ -23,11 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const loginError = document.getElementById('login-error');
 
+
     // Observador de estado de autenticación (redirige si ya está logueado)
     auth.onAuthStateChanged(user => {
         if (user) {
-            console.log('Usuario logueado, redirigiendo a formulario.html');
-            window.location.href = 'formulario.html';
+            console.log('Usuario ya logueado, redirigiendo a perfil.html');
+            window.location.href = 'perfil.html';
         }
     });
 
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Intentar iniciar sesión con el método de Firebase
             const userCredential = await auth.signInWithEmailAndPassword(email, password);
             console.log('Inicio de sesión exitoso para:', userCredential.user.email);
-            // El observador onAuthStateChanged se encargará de la redirección
+            window.location.href = 'perfil.html'; // Redirección inmediata
         } catch (error) {
             // Manejar errores de inicio de sesión
             console.error('Error de inicio de sesión:', error.code, error.message);
@@ -55,4 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             loginError.classList.remove('hidden');
         }
     });
+
+
 });

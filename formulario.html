@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 </head>
 <body class="form-page">
-    <div class="form-container">
+    <form id="incidenciaForm" class="form-container">
         <img src="imagenes/logo-cermaq.png" alt="Logo Cermaq Chile" class="form-logo">
 
         <h1>Formulario de Registro de Incidencias Cermaq Chile</h1>
@@ -167,13 +167,15 @@
             </div>
         </section>
 
-        <button type="button" id="submitForm">Registrar Incidencia</button>
+        <button type="submit" id="submitForm" class="submit-button">Registrar Incidencia</button>
+        <div id="form-message" class="form-message-container"></div>
 
         <section class="form-section" id="section-generar-reporte">
             <h2>Generar Reporte del Día</h2>
             <p>Haz clic para ver y descargar el reporte completo de las incidencias registradas hoy.</p>
             <button type="button" id="generarReporteDia">Ver Reporte del Día</button>
-            <button type="button" id="logoutBtn" class="hidden">Cerrar Sesión</button>
+
+            <button type="button" id="logoutBtn" class="logout-button">Cerrar Sesión</button>
         </section>
     </div>
 

@@ -12,10 +12,12 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reporte.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body>
-    <div class="container"> <img src="imagenes/logo-cermaq.png" alt="Logo Cermaq Chile" class="form-logo">
+<body class="report-page">
+    <div class="report-container"> 
+        <img src="imagenes/logo-cermaq.png" alt="Logo Cermaq Chile" class="report-logo">
         <h1 id="reporteTitulo">Reporte de Incidencias Cermaq Chile</h1>
         <p id="reporteFecha">Cargando fecha y filtros...</p>
 
@@ -53,7 +55,7 @@
 
         <hr> <section id="incidenciasDisplaySection"> <h2>Incidencias Registradas</h2>
             <div id="reporteContent" class="reporte-content-wrapper"> <div id="incidenciasReporteContainer" class="incidencias-grid">
-                    <p class="no-incidencias-message" style="display: none;">No se encontraron incidencias con los filtros aplicados.</p>
+                    <p class="no-incidencias-message">No se encontraron incidencias con los filtros aplicados.</p>
                 </div>
             </div>
         </section>

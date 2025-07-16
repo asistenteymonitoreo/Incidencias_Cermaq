@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const valorTurbidezInput = document.getElementById('valorTurbidez');
     const generarReporteDiaBtn = document.getElementById('generarReporteDia');
     const logoutBtn = document.getElementById('logoutBtn');
+    const formMessage = document.getElementById('form-message'); // Contenedor para mensajes
 
     // Almacenará los datos cargados desde los JSON (para poblar selects)
     let appData = { // Renombrado a appData para evitar conflicto con 'data' global de Firebase si se usara
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Error al cargar los datos de JSON:', error);
-            alert('Hubo un error al cargar los datos del formulario. Por favor, recargue la página.');
+            showMessage('Hubo un error al cargar los datos del formulario. Por favor, recargue la página.', 'error');
         }
     };
 
@@ -226,43 +227,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // -- Lógica de Envío del Formulario a Firebase --
     // ----------------------------------------------------
     // ----------------------------------------------------
-    // -- Lógica de Autenticación y Cierre de Sesión --
+    // -- Lógica de Cierre de Sesión --
     // ----------------------------------------------------
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            // El usuario ha iniciado sesión
-            console.log('Usuario logueado:', user.email);
-            logoutBtn.classList.remove('hidden');
-        } else {
-            // El usuario no ha iniciado sesión, redirigir a la página de login
-            console.log('Usuario no logueado, redirigiendo...');
-            window.location.href = 'index.html';
-        }
-    });
-
     logoutBtn.addEventListener('click', async () => {
         try {
             await auth.signOut();
             console.log('Sesión cerrada exitosamente.');
-            // onAuthStateChanged se encargará de la redirección
+            window.location.href = 'index.html'; // Redirigir al login al cerrar sesión
         } catch (error) {
             console.error('Error al cerrar sesión:', error);
-            alert('Error al cerrar sesión.');
         }
     });
 
+    // ----------------------------------------------------
+    // -- Lógica de Envío del Formulario a Firebase --
+    // ----------------------------------------------------
+    submitButton.addEventListener('click', async () => {
+        // Validar que el usuario esté logueado antes de intentar registrar
+        if (!auth.currentUser) {
+            showMessage('Debe iniciar sesión para registrar una incidencia.', 'error');
+            return;
+        }
 
-    submitButton.addEventListener('click', async (event) => { // Añadir 'async' porque usaremos promesas
-        event.preventDefault();
-
-        // Recolectar todos los datos del formulario
         const formData = {
             fechaHora: fechaHoraInput.value,
             turno: document.getElementById('turno').value,
             centro: centroSelect.value,
             tipoIncidencia: document.querySelector('input[name="tipoIncidencia"]:checked')?.value,
             timestamp: Date.now(), // Timestamp para ordenar fácilmente
-            // Guardar el UID y email del usuario que registra la incidencia
             userId: auth.currentUser.uid,
             userEmail: auth.currentUser.email
         };
@@ -285,47 +277,38 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.estadoSensor = document.getElementById('estadoSensor').value;
         }
 
-        // Añadir datos de evaluación de riesgos al nivel superior del objeto (LA CORRECCIÓN)
+        // Añadir datos de evaluación de riesgos
         formData.tiempoResolucion = document.getElementById('tiempoResolucion').value;
         formData.riesgoPeces = document.querySelector('input[name="riesgoPeces"]:checked')?.value;
         formData.perdidaEconomica = document.querySelector('input[name="perdidaEconomica"]:checked')?.value;
         formData.riesgoPersonas = document.querySelector('input[name="riesgoPersonas"]:checked')?.value;
         formData.observacion = document.getElementById('observacion').value;
 
-        // Validar que el usuario esté logueado antes de intentar registrar
-        if (!auth.currentUser) {
-            alert('Debe iniciar sesión para registrar una incidencia.');
-            return;
-        }
-
-        // Validación básica (LA CORRECCIÓN)
+        // Validación básica
         if (!formData.fechaHora || !formData.turno || !formData.centro || !formData.tipoIncidencia ||
             !formData.tiempoResolucion || !formData.riesgoPeces ||
             !formData.perdidaEconomica || !formData.riesgoPersonas) {
-            alert('Por favor, complete todos los campos obligatorios del formulario.');
+            showMessage('Por favor, complete todos los campos obligatorios del formulario.', 'error');
             return;
         }
 
         if (formData.tipoIncidencia === 'modulos' && (!formData.modulo || !formData.estanque)) {
-            alert('Por favor, seleccione el módulo y el estanque.');
+            showMessage('Por favor, seleccione el módulo y el estanque.', 'error');
             return;
         }
         if (formData.tipoIncidencia === 'sensores' && (!formData.sistemaSensor || !formData.sensorDetectado || !formData.estadoSensor)) {
-            alert('Por favor, seleccione el sistema, sensor y estado del sensor.');
+            showMessage('Por favor, seleccione el sistema, sensor y estado del sensor.', 'error');
             return;
         }
 
         console.log('Datos del formulario a registrar en Firebase:', formData);
 
         try {
-            // Envía los datos a Firebase Realtime Database
             await incidenciasRef.push(formData);
-
-            alert('Incidencia registrada con éxito en Firebase.');
-            console.log('Incidencia guardada en Firebase.');
-
-            // Limpiar y resetear el formulario
-            event.target.closest('form').reset();
+            showMessage('Incidencia registrada con éxito.', 'success');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('incidenciaForm').reset();
+            // Resetear la visibilidad y contenido de las secciones
             hideSection(tipoIncidenciaSection);
             hideSection(modulosEstanquesSection);
             hideSection(sistemaSensoresSection);
@@ -338,12 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
             valorOxigenoInput.style.display = 'none';
             valorTemperaturaInput.style.display = 'none';
             valorTurbidezInput.style.display = 'none';
-            setLocalDateTime(); // Vuelve a establecer la fecha y hora actual
+            setLocalDateTime();
         } catch (error) {
             console.error("Error al registrar incidencia en Firebase:", error);
-            alert("Error al registrar la incidencia. Por favor, revise la consola para más detalles.");
+            showMessage("Error al registrar la incidencia. Por favor, revise la consola para más detalles.", 'error');
         }
-    });
+    }); // <-- ESTE CIERRE FALTABA
 
     // ----------------------------------------------------
     // -- Lógica para el botón "Generar Reporte del Día" --
@@ -354,6 +337,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'reporte.html';
     });
 
+
+
     // 9. Cargar los datos de los JSONs al iniciar la página
     loadData();
+
 });

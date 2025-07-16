@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const filtroTipoIncidenciaSelect = document.getElementById('filtroTipoIncidencia');
     const aplicarFiltrosBtn = document.getElementById('aplicarFiltrosBtn');
     const resetFiltrosBtn = document.getElementById('resetFiltrosBtn');
+    const eliminarReporteBtn = document.getElementById('eliminarReporteBtn'); // Botón para eliminar
 
     let allIncidencias = []; // Almacenará TODAS las incidencias cargadas desde Firebase
     let currentFilteredIncidencias = []; // Almacenará las incidencias actualmente filtradas y renderizadas
@@ -436,6 +437,60 @@ document.addEventListener('DOMContentLoaded', () => {
         
         fetchIncidenciasFromFirebase(); // Iniciar la escucha y carga de Firebase
     };
+
+    // ----------------------------------------------------
+    // -- Funcionalidad para Eliminar Incidencias por Fecha --
+    // ----------------------------------------------------
+    const handleDeleteByDate = () => {
+        const fechaParaEliminar = filtroFechaInput.value;
+
+        if (!fechaParaEliminar) {
+            alert('Por favor, selecciona una fecha en el filtro para poder eliminar las incidencias correspondientes.');
+            return;
+        }
+
+        const confirmacion = confirm(`¿Estás seguro de que quieres eliminar TODAS las incidencias del día ${fechaParaEliminar}? Esta acción no se puede deshacer.`);
+
+        if (!confirmacion) {
+            console.log('Eliminación cancelada por el usuario.');
+            return;
+        }
+
+        // Encontrar todas las incidencias que coinciden con la fecha seleccionada
+        const idsParaEliminar = allIncidencias
+            .filter(inc => {
+                const incDateString = new Date(inc.fechaHora).toISOString().slice(0, 10);
+                return incDateString === fechaParaEliminar;
+            })
+            .map(inc => inc.id);
+
+        if (idsParaEliminar.length === 0) {
+            alert(`No se encontraron incidencias para la fecha ${fechaParaEliminar}.`);
+            return;
+        }
+
+        console.log(`Se eliminarán ${idsParaEliminar.length} incidencias con fecha ${fechaParaEliminar}.`);
+
+        // Crear un objeto para una actualización multi-ruta (elimina todo de una vez)
+        const updates = {};
+        idsParaEliminar.forEach(id => {
+            updates[id] = null; // Poner a null un nodo en Firebase lo elimina
+        });
+
+        // Ejecutar la eliminación
+        incidenciasRef.update(updates)
+            .then(() => {
+                alert(`Se han eliminado correctamente ${idsParaEliminar.length} incidencias del día ${fechaParaEliminar}.`);
+                // La vista se actualizará automáticamente gracias al listener 'on value'
+            })
+            .catch(error => {
+                console.error('Error al eliminar las incidencias:', error);
+                alert('Hubo un error al intentar eliminar las incidencias. Por favor, revisa la consola para más detalles.');
+            });
+    };
+
+    eliminarReporteBtn.addEventListener('click', handleDeleteByDate);
+
 
     initializeReportPage(); // Llama a la función de inicialización
 });
