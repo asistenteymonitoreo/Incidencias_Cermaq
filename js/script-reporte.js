@@ -195,13 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2 class="card-center-title">${nombreCentro}</h2>
                     <p><strong>Fecha/Hora:</strong> ${fecha}</p>
                     <p><strong>Turno:</strong> ${inc.turno || 'N/A'}</p>
+                    <p><strong>Usuario:</strong> ${inc.nombreUsuario || 'No registrado'}</p>
                     ${detallesIncidencia}
                     <h4>Evaluación de Riesgos:</h4>
-                    <p><strong>Tiempo de resolución (min):</strong> ${inc.evaluacionRiesgos?.tiempoResolucion || 'N/A'}</p>
-                    <p><strong>Riesgo para peces:</strong> ${inc.evaluacionRiesgos?.riesgoPeces === 'si' ? 'Sí' : 'No'}</p>
-                    <p><strong>Pérdida económica:</strong> ${inc.evaluacionRiesgos?.perdidaEconomica === 'si' ? 'Sí' : 'No'}</p>
-                    <p><strong>Riesgo para personas:</strong> ${inc.evaluacionRiesgos?.riesgoPersonas === 'si' ? 'Sí' : 'No'}</p>
-                    <p><strong>Observación:</strong> ${inc.evaluacionRiesgos?.observacion || 'Ninguna'}</p>
+                    <p><strong>Tiempo de resolución (min):</strong> ${inc.tiempoResolucion || 'N/A'}</p>
+                    <p><strong>Riesgo para peces:</strong> ${inc.riesgoPeces === 'si' ? 'Sí' : 'No'}</p>
+                    <p><strong>Pérdida económica:</strong> ${inc.perdidaEconomica === 'si' ? 'Sí' : 'No'}</p>
+                    <p><strong>Riesgo para personas:</strong> ${inc.riesgoPersonas === 'si' ? 'Sí' : 'No'}</p>
+                    <p><strong>Observación:</strong> ${inc.observacion || 'Ninguna'}</p>
                 `;
                 incidenciasReporteContainer.appendChild(card);
             });

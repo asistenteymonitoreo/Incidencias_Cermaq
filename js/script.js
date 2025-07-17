@@ -20,6 +20,18 @@ const auth = firebase.auth(); // Obtener la instancia de Auth
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Usar setTimeout para asegurar que el DOM esté completamente listo
+    setTimeout(() => {
+        const nombreUsuarioInput = document.getElementById('nombreUsuario');
+        const selectedProfileName = localStorage.getItem('selectedProfileName');
+
+        if (selectedProfileName && nombreUsuarioInput) {
+            nombreUsuarioInput.value = selectedProfileName;
+        } else if (nombreUsuarioInput) {
+            nombreUsuarioInput.value = 'Perfil no seleccionado';
+        }
+    }, 100);
+
     // 1. Obtener referencias a los elementos del DOM
     const fechaHoraInput = document.getElementById('fechaHora');
     const centroSelect = document.getElementById('centro');
@@ -250,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const formData = {
+            nombreUsuario: document.getElementById('nombreUsuario').value, // <-- DATO AÑADIDO
             fechaHora: fechaHoraInput.value,
             turno: document.getElementById('turno').value,
             centro: centroSelect.value,

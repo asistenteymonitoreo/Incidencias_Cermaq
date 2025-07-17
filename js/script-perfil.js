@@ -13,9 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; 
             }
 
-            // Para cualquier otro perfil, redirigimos al formulario.
-            console.log(`Perfil "${item.querySelector('.profile-name').textContent}" seleccionado. Redirigiendo a formulario.html`);
-            window.location.href = 'formulario.html';
+            // Para cualquier otro perfil, guardamos el nombre y redirigimos.
+            const profileName = item.querySelector('.profile-name').textContent;
+            localStorage.setItem('selectedProfileName', profileName);
+
+            console.log(`Perfil "${profileName}" seleccionado. Redirigiendo a formulario.html`);
+            // Retrasar la redirección para asegurar que localStorage se guarde
+            setTimeout(() => {
+                window.location.href = 'formulario.html';
+            }, 50);
         });
     });
 
