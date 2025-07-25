@@ -1,0 +1,757 @@
+
+
+body.login-page {
+    font-family: 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    max-width: 800px;
+    width: 100%;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 35px;
+    color: #333;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.login-form .form-group {
+    position: relative; /* Clave para posicionar el icono */
+    margin-bottom: 25px;
+}
+
+.login-form .icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1.1em;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px 0 10px 35px; /* Espacio a la izquierda para el icono */
+    border: none;
+    border-bottom: 2px solid #e0e0e0;
+    background: transparent;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-bottom-color: #009CA6;
+}
+
+.login-form input::placeholder {
+    color: #aaa;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-form input:focus + .icon {
+    color: #009CA6;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 14px;
+    background-color: #009CA6; /* Color corporativo */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.login-form button:hover {
+    background-color: #007f87;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 156, 166, 0.25);
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* =================================================================== */
+/* ESTILOS PARA EL FORMULARIO DE INCIDENCIAS (formulario.html)       */
+/* =================================================================== */
+
+body.form-page {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+    background-image: url('../imagenes/fondo.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+        margin: 20px auto;
+}
+
+/* Estilos para el contenedor de mensajes del formulario */
+.form-message-container {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    text-align: center;
+    display: none; /* Oculto por defecto */
+    transition: opacity 0.5s ease;
+}
+
+.form-message-container.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.form-message-container.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.form-container .form-logo {
+    display: block;
+    margin: -60px auto 20px auto;
+    width: 180px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    color: #009CA6;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    padding-top: 10px;
+}
+
+.form-section {
+    background-color: rgba(238, 245, 250, 0.8);
+    border: 1px solid #d4eded;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.form-section h2 {
+    color: #007f87;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #cce7ea;
+}
+
+.form-page .form-group {
+    margin-bottom: 15px;
+}
+
+.form-page .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-page .form-group input[type="text"],
+.form-page .form-group input[type="number"],
+.form-page .form-group input[type="datetime-local"],
+.form-page .form-group select,
+.form-page .form-group textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.form-page .form-group textarea {
+    resize: vertical;
+}
+
+.form-page .form-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.5%2075.1a17.6%2017.6%200%200%200-24.7%2024.7l130.4%20130.4c6.8%206.8%2017.8%206.8%2024.6%200l130.4-130.4a17.6%2017.6%200%200%200-13-30.3z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 12px auto;
+    padding-right: 30px;
+}
+
+.form-group-radio {
+    margin-bottom: 10px;
+}
+
+.form-group-radio input[type="radio"],
+.form-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-group-radio label,
+.form-group input[type="checkbox"] + label {
+    display: inline-block;
+    font-weight: normal;
+    color: #555;
+    cursor: pointer;
+}
+
+#submitForm {
+    background-color: #009CA6;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+}
+
+#submitForm:hover {
+    background-color: #007f87;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.hidden-input {
+    display: none;
+    margin-top: 10px;
+}
+
+#section-generar-reporte p {
+    margin-bottom: 20px;
+}
+
+#generarReporteDia {
+    background-color: #007f87;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+#generarReporteDia:hover {
+    background-color: #006066;
+}
+
+#logoutBtn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0 auto;
+    width: 25%;
+    min-width: 200px;
+}
+
+#logoutBtn:hover {
+    background-color: #c82333;
+}
+
+/* Mensaje cuando no hay incidencias */
+.no-incidencias-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+    grid-column: 1 / -1; /* Para que ocupe todo el ancho de la cuadrícula */
+}
+
+/* Estilo para el botón "Generar Reporte del Día" en index.html */
+#generarReporteDia {
+    background-color: #007f87; /* Un tono diferente para distinguirlo del principal */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+#generarReporteDia:hover {
+    background-color: #006066;
+}
+
+/* Estilo para el botón de Cerrar Sesión */
+#logoutBtn {
+    background-color: #dc3545; /* Rojo para acciones de salida/peligro */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0 auto; /* Margen superior para separarlo */
+    width: 25%; /* Ancho relativo al contenedor */
+    min-width: 200px; /* Ancho mínimo para asegurar que sea más grande que el botón de reporte */
+}
+
+#logoutBtn:hover {
+    background-color: #c82333; /* Rojo más oscuro */
+}
+
+/* Estilos para los botones de descarga en reporte.html */
+.download-button {
+    background-color: #28a745; /* Un color verde para diferenciar la descarga */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.download-button:hover {
+    background-color: #218838;
+}
+
+/* Estilo para el botón "Volver al Formulario" en reporte.html */
+.back-button {
+    background-color: #009CA6; /* Mismo color que el submit principal para consistencia */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.back-button:hover {
+    background-color: #007f87;
+}
+
+/* Estilos para los botones de filtro */
+.filter-button {
+
+/* =================================================================== */
+/* ESTILOS PARA LA PÁGINA DE SELECCIÓN DE PERFIL (perfil.html)   */
+/* =================================================================== */
+
+.profile-selection-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px;
+}
+
+.profile-selection-card .title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.profile-item {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para el botón de Cerrar Sesión */
+.logout-button {
+    background-color: #dc3545; /* Color rojo para indicar una acción de salida */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px; /* Margen superior para separarlo */
+    display: block; /* Para que ocupe su propia línea */
+    width: fit-content; /* Para que el ancho se ajuste al contenido */
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Un rojo más oscuro al pasar el ratón */
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #009CA6;
+    border: 3px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.profile-item:hover .profile-avatar {
+    border-color: #009CA6;
+}
+
+.profile-name {
+    font-weight: 500;
+    color: #555;
+}
+
+.manage-profiles-button {
+    background-color: transparent;
+    border: 2px solid #ccc;
+    color: #777;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.manage-profiles-button:hover {
+    background-color: #009CA6;
+    border-color: #009CA6;
+    color: #fff;
+}
+
+    background-color: #007bff; /* Un azul para los filtros */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+}
+
+.filter-button.reset-button {
+    background-color: #6c757d; /* Un gris para el botón de reset */
+}
+
+.filter-button.reset-button:hover {
+    background-color: #5a6268;
+}
+/* estilos_perfil.css */
+
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif; /* Usar una fuente moderna y legible */
+    background-color: #f0f2f5; /* Fondo gris claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Incluir padding en el tamaño total */
+}
+
+.container {
+    width: 100%;
+    max-width: 700px; /* Ancho máximo para la tarjeta principal */
+    background-color: #ffffff;
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    padding: 40px; /* Más padding interno */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.header {
+    margin-bottom: 35px;
+}
+
+.logo-text {
+    font-family: 'Arial Black', sans-serif; /* Simula la tipografía del logo */
+    color: #007f87; /* Color azul/turquesa de Cermaq */
+    font-size: 2.5em; /* Tamaño del logo */
+    margin: 0;
+    letter-spacing: 2px; /* Espaciado entre letras */
+}
+
+.profile-selection-card {
+    /* No se necesitan estilos adicionales si ya es el .container */
+}
+
+.title {
+    color: #333; /* Color más oscuro para el título principal */
+    font-size: 2.2em;
+    margin-bottom: 45px; /* Más espacio debajo del título */
+    font-weight: 700; /* Más negrita */
+}
+
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Columnas responsivas */
+    gap: 25px; /* Espacio entre los perfiles */
+    margin-bottom: 40px;
+    justify-content: center; /* Centra los elementos si no llenan la cuadrícula */
+}
+
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    padding: 20px 10px; /* Padding ajustado */
+    border-radius: 10px;
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    background-color: #fbfbfb; /* Ligeramente diferente para el fondo de la card */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave para cada card */
+}
+
+.profile-item:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    border-color: #007f87; /* Color turquesa al hacer hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.2); /* Sombra con el color de Cermaq */
+}
+
+.profile-avatar {
+    width: 85px; /* Tamaño del avatar */
+    height: 85px;
+    background-color: #e0e6eb; /* Color de fondo para el avatar */
+    border-radius: 50%; /* Circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.2em; /* Tamaño del icono */
+    color: #6c757d; /* Color del icono */
+    margin-bottom: 12px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Pequeña sombra interna para profundidad */
+}
+
+.profile-avatar i {
+    color: inherit; /* Hereda el color del padre */
+}
+
+/* Estilo específico para el perfil "Agregar Perfil" */
+.add-profile .profile-avatar {
+    background-color: #007f87; /* Fondo turquesa para el botón de añadir */
+    color: #ffffff; /* Icono blanco */
+}
+
+.add-profile:hover .profile-avatar {
+    background-color: #007f87; /* Un poco más oscuro al hacer hover */
+}
+
+.profile-name {
+    font-size: 1.1em;
+    color: #495057;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.manage-profiles-button {
+    background-color: transparent;
+    border: 2px solid #007bff; /* Borde del color de Cermaq */
+    color: #007bff;
+    padding: 12px 30px;
+    border-radius: 25px; /* Más redondeado */
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: 20px; /* Espacio superior */
+    outline: none; /* Remueve el contorno al hacer clic */
+}
+
+.manage-profiles-button:hover {
+    background-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4); /* Sombra al hacer hover */
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        margin: 15px;
+    }
+    .title {
+        font-size: 1.8em;
+        margin-bottom: 35px;
+    }
+    .profiles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 15px;
+    }
+    .profile-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 2.8em;
+    }
+    .profile-name {
+        font-size: 1em;
+    }
+    .manage-profiles-button {
+        padding: 10px 25px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+    }
+    .title {
+        font-size: 1.6em;
+        margin-bottom: 30px;
+    }
+    .profiles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5em;
+    }
+}
+/* Estilos específicos para impresión (opcional, pero útil) */
+@media print {
+    body {
+        background-color: #fff;
+        background-image: none; /* No imprimir la imagen de fondo */
+        margin: 0;
+        padding: 0;
+    }
+    .form-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: none;
+        background-color: #fff; /* Asegura fondo blanco en impresión */
+    }
+    /* Oculta los botones y secciones del formulario que no son el reporte */
+    .print-button, .download-button, .back-button,
+    #section-info-basica, #section-tipo-incidencia,
+    #section-modulos-estanques, #section-sistema-sensores,
+    #section-evaluacion-riesgos, #submitForm, #generarReporteDia,
+    #reporteTitulo + p, /* Oculta la fecha de reporte si quieres una más limpia en el título */
+    .form-logo /* No imprimir el logo */
+    {
+        display: none !important;
+    }
+
+    #filtrosReporteSection {
+        display: none !important;
+    }
+
+    #reporteIncidenciasSection {
+        border: none;
+        background-color: #fff;
+        padding: 0;
+    }
+    /* Asegura que las tarjetas no se corten entre páginas */
+    .incidencia-card {
+        page-break-inside: avoid;
+        margin-bottom: 15px;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    .incidencia-card::before {
+        background-color: #ccc; /* Un color más neutro para imprimir el contador */
+        color: #333;
+    }
+
+    /* Ajuste para el título del reporte en la impresión */
+    #reporteTitulo {
+        text-align: left;
+        margin-bottom: 10px;
+        color: #333;
+    }
+}

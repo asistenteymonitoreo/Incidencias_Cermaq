@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Monitoreo Cermaq</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    <div class="form-container">
+        <img src="imagenes/logo-cermaq.png" alt="Logo Cermaq Chile" class="form-logo">
+        <h1>Iniciar Sesión</h1>
+        
+        <form id="login-form" class="login-form">
+            <div class="form-group">
+                <i class="fas fa-user icon"></i>
+                <input type="email" id="email" placeholder="Correo Electrónico" required>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" id="password" placeholder="Contraseña" required>
+            </div>
+            
+            <button type="submit">Ingresar</button>
+        </form>
+        <div id="login-error" class="error-message hidden"></div>
+
+
+
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    
+    <!-- Tu script de autenticación -->
+    <script src="js/auth.js"></script>
+</body>
+</html>

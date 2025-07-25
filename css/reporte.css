@@ -1,0 +1,197 @@
+/* =================================================================== */
+/* ESTILOS PARA LA PÁGINA DE REPORTE (reporte.html)          */
+/* =================================================================== */
+
+/* Estilo general del body para la página de reporte */
+body.report-page {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+    background-image: url('../imagenes/fondo.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Contenedor principal del reporte */
+.report-container {
+    background-color: rgba(255, 255, 255, 0.98);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.report-logo {
+    display: block;
+    margin: 0 auto 20px auto;
+    height: 50px;
+}
+
+.report-container h1 {
+    text-align: center;
+    color: #005f73;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.report-container h2 {
+    color: #003e4d;
+    border-bottom: 2px solid #ade8f4;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.report-container p#reporteFecha {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Controles de filtrado y exportación */
+.report-controls {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.filter-group {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.filter-buttons, .download-buttons, .report-actions-bottom {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Grid para mostrar las incidencias */
+.incidencias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    padding-top: 20px;
+}
+
+/* Tarjeta individual para cada incidencia */
+.incidencia-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-left: 5px solid #0077b6;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.incidencia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.incidencia-card h3 {
+    color: #003e4d;
+    margin-top: 0;
+    font-size: 1.4em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.incidencia-card p {
+    margin: 0 0 12px 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.incidencia-card strong {
+    color: #005f73;
+}
+
+.incidencia-card .parametro-item {
+    background-color: #f4f8fa;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
+
+/* Estilos para botones (reutilizando y mejorando) */
+.filter-button, .download-button, .back-button, .delete-button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    color: white;
+}
+
+.filter-button:hover, .download-button:hover, .back-button:hover, .delete-button:hover {
+    transform: translateY(-2px);
+}
+
+.filter-button {
+    background-color: #007bff;
+}
+.filter-button:hover {
+    background-color: #0069d9;
+}
+
+.reset-button {
+    background-color: #6c757d;
+}
+
+.reset-button:hover {
+    background-color: #5a6268;
+}
+
+.excel-button { background-color: #1D6F42; }
+.excel-button:hover { background-color: #165231; }
+
+.pdf-button { background-color: #D93025; }
+.pdf-button:hover { background-color: #b0261d; }
+
+.txt-button { background-color: #5f6368; }
+.txt-button:hover { background-color: #4b4e52; }
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.back-button {
+    background-color: #17a2b8;
+}
+.back-button:hover {
+    background-color: #138496;
+}
+
+/* Ocultar mensaje de 'no incidencias' por defecto */
+.no-incidencias-message {
+    display: none; /* Oculto por defecto, JS lo mostrará */
+    text-align: center;
+    width: 100%;
+    grid-column: 1 / -1; /* Asegura que ocupe todo el ancho del grid */
+    padding: 20px;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+}

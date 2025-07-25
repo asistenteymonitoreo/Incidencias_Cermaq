@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Incidencias - Cermaq Chile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FirebaseUI CSS -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+</head>
+<body class="form-page">
+    <form id="incidenciaForm" class="form-container">
+        <img src="imagenes/logo-cermaq.png" alt="Logo Cermaq Chile" class="form-logo">
+
+        <h1>Formulario de Registro de Incidencias Cermaq Chile</h1>
+
+        <section class="form-section" id="section-info-basica">
+            <h2>1. Información Básica del Reporte</h2>
+            <div class="form-group">
+                <label for="nombreUsuario">Usuario:</label>
+                <input type="text" id="nombreUsuario" name="nombreUsuario" readonly>
+            </div>
+            <div class="form-group">
+                <label for="fechaHora">Fecha y Hora:</label>
+                <input type="datetime-local" id="fechaHora" name="fechaHora" required>
+            </div>
+            <div class="form-group">
+                <label for="turno">Turno:</label>
+                <select id="turno" name="turno" required>
+                    <option value="">Seleccione un turno</option>
+                    <option value="dia">Día</option>
+                    <option value="T">Tarde</option>
+                    <option value="noche">Noche</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="centro">Centro:</label>
+                <select id="centro" name="centro" required>
+                    <option value="">Seleccione un centro</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="form-section hidden" id="section-tipo-incidencia">
+            <h2>2. Tipo de Incidencia</h2>
+            <div class="form-group-radio">
+                <input type="radio" id="tipoModulos" name="tipoIncidencia" value="modulos">
+                <label for="tipoModulos">Parámetros de Módulos y Estanques</label>
+            </div>
+            <div class="form-group-radio">
+                <input type="radio" id="tipoSensores" name="tipoIncidencia" value="sensores">
+                <label for="tipoSensores">Sistemas de Sensores</label>
+            </div>
+        </section>
+
+        <section class="form-section hidden" id="section-modulos-estanques">
+            <h2>3. Detalles: Módulos y Estanques</h2>
+            <div class="form-group">
+                <label for="modulo">Módulo:</label>
+                <select id="modulo" name="modulo">
+                    <option value="">Seleccione un módulo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estanque">Estanque:</label>
+                <select id="estanque" name="estanque">
+                    <option value="">Seleccione un estanque</option>
+                </select>
+            </div>
+            <h3>Parámetros Afectados:</h3>
+            <div class="form-group">
+                <label for="oxigeno">Oxígeno:</label>
+                <select id="oxigeno" name="oxigeno">
+                    <option value="">Seleccione estado</option>
+                    <option value="alta">Alta</option>
+                    <option value="baja">Baja</option>
+                </select>
+                <input type="number" id="valorOxigeno" name="valorOxigeno" placeholder="Valor (mg/L)" step="0.1" class="hidden-input">
+            </div>
+            <div class="form-group">
+                <label for="temperatura">Temperatura:</label>
+                <select id="temperatura" name="temperatura">
+                    <option value="">Seleccione estado</option>
+                    <option value="alta">Alta</option>
+                    <option value="baja">Baja</option>
+                </select>
+                <input type="number" id="valorTemperatura" name="valorTemperatura" placeholder="Valor (°C)" step="0.1" class="hidden-input">
+            </div>
+            <div class="form-group">
+                <label for="conductividad">Conductividad:</label>
+                <select id="conductividad" name="conductividad">
+                    <option value="">Seleccione estado</option>
+                    <option value="alta">Alta</option>
+                    <option value="baja">Baja</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="turbidez">Turbidez:</label>
+                <select id="turbidez" name="turbidez">
+                    <option value="">Seleccione estado</option>
+                    <option value="alta">Alta</option>
+                    <option value="baja">Baja</option>
+                </select>
+                <input type="number" id="valorTurbidez" name="valorTurbidez" placeholder="Valor (NTU)" step="0.1" class="hidden-input">
+            </div>
+            <div class="form-group">
+                <label>Otros:</label><br>
+                <input type="checkbox" id="otros1" name="otros" value="pH">
+                <label for="otros1">pH</label><br>
+                <input type="checkbox" id="otros2" name="otros" value="CO2">
+                <label for="otros2">CO2</label><br>
+                <input type="checkbox" id="otros3" name="otros" value="Salinidad">
+                <label for="otros3">Salinidad</label>
+            </div>
+        </section>
+
+        <section class="form-section hidden" id="section-sistema-sensores">
+            <h2>4. Detalles: Sistemas de Sensores</h2>
+            <div class="form-group">
+                <label for="sistemaSensor">Sistema:</label>
+                <select id="sistemaSensor" name="sistemaSensor">
+                    <option value="">Seleccione un sistema</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sensorDetectado">Sensor Detectado:</label>
+                <select id="sensorDetectado" name="sensorDetectado">
+                    <option value="">Seleccione un sensor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estadoSensor">Estado del Sensor:</label>
+                <select id="estadoSensor" name="estadoSensor">
+                    <option value="">Seleccione el estado</option>
+                    <option value="bajo_limite">Bajo el límite</option>
+                    <option value="sobre_limite">Sobre el límite</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="form-section hidden" id="section-evaluacion-riesgos">
+            <h2>5. Evaluación de Riesgos y Observaciones</h2>
+            <div class="form-group">
+                <label for="tiempoResolucion">Tiempo de Resolución Estimado (minutos):</label>
+                <input type="number" id="tiempoResolucion" name="tiempoResolucion" min="0" required>
+            </div>
+            <div class="form-group">
+                <label>Riesgo para Peces:</label>
+                <input type="radio" id="riesgoPecesSi" name="riesgoPeces" value="si" required>
+                <label for="riesgoPecesSi">Sí</label>
+                <input type="radio" id="riesgoPecesNo" name="riesgoPeces" value="no" required>
+                <label for="riesgoPecesNo">No</label>
+            </div>
+            <div class="form-group">
+                <label>Pérdida Económica:</label>
+                <input type="radio" id="perdidaEconomicaSi" name="perdidaEconomica" value="si" required>
+                <label for="perdidaEconomicaSi">Sí</label>
+                <input type="radio" id="perdidaEconomicaNo" name="perdidaEconomica" value="no" required>
+                <label for="perdidaEconomicaNo">No</label>
+            </div>
+            <div class="form-group">
+                <label>Riesgo para Personas:</label>
+                <input type="radio" id="riesgoPersonasSi" name="riesgoPersonas" value="si" required>
+                <label for="riesgoPersonasSi">Sí</label>
+                <input type="radio" id="riesgoPersonasNo" name="riesgoPersonas" value="no" required>
+                <label for="riesgoPersonasNo">No</label>
+            </div>
+            <div class="form-group">
+                <label for="observacion">Observación Adicional:</label>
+                <textarea id="observacion" name="observacion" rows="4" placeholder="Describa cualquier detalle relevante..."></textarea>
+            </div>
+        </section>
+
+        <button type="submit" id="submitForm" class="submit-button">Registrar Incidencia</button>
+        <div id="form-message" class="form-message-container"></div>
+
+        <section class="form-section" id="section-generar-reporte">
+            <h2>Generar Reporte del Día</h2>
+            <p>Haz clic para ver y descargar el reporte completo de las incidencias registradas hoy.</p>
+            <button type="button" id="generarReporteDia">Ver Reporte del Día</button>
+
+            <button type="button" id="logoutBtn" class="logout-button">Cerrar Sesión</button>
+        </section>
+    </form>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

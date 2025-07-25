@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Perfil - CERMAQ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0x30z64vY28WfW+G38uQdJj+j4Q2bWj/s+bQz8Wf/K/V3gA/P2/z3+J8w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo-text">CERMAQ</h1>
+        </header>
+
+        <main class="profile-selection-card">
+            <h2 class="title">¿Quién está Trabajando?</h2>
+
+            <div class="profiles-grid">
+                <div class="profile-item" data-profile-id="admin">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="profile-name">Samuel Gaez</span>
+                </div>
+
+                <div class="profile-item" data-profile-id="monitoreo">
+                    <div class="profile-avatar">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <span class="profile-name">Cristobal Soto</span>
+                </div>
+
+                <div class="profile-item" data-profile-id="produccion">
+                    <div class="profile-avatar">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <span class="profile-name">Matias Concha</span>
+                </div>
+
+                <div class="profile-item" data-profile-id="calidad">
+                    <div class="profile-avatar">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span class="profile-name">Jairo Rain</span>
+                </div>
+
+                <div class="profile-item" data-profile-id="finanzas">
+                    <div class="profile-avatar">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <span class="profile-name">Gustavo Rojas</span>
+                </div>
+                
+                <div class="profile-item" data-profile-id="finanzas">
+                    <div class="profile-avatar">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <span class="profile-name">Brayan Castro</span>
+                </div>
+
+                <div class="profile-item add-profile" data-profile-id="add">
+                    <div class="profile-avatar">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="profile-name">Agregar Perfil</span>
+                </div>
+            </div>
+
+            <button class="manage-profiles-button">Gestionar Perfiles</button>
+        </main>
+    </div>
+
+    <script src="js/script-perfil.js"></script>
+</body>
+</html>

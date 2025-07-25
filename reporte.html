@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Incidencias - Cermaq Chile</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="report-page">
+    <div class="report-container"> 
+        <img src="imagenes/logo-cermaq.png" alt="Logo Cermaq Chile" class="report-logo">
+        <h1 id="reporteTitulo">Reporte de Incidencias Cermaq Chile</h1>
+        <p id="reporteFecha">Cargando fecha y filtros...</p>
+
+        <section class="report-controls"> <h2>Opciones de Filtrado y Exportación</h2>
+            <div class="form-group filter-group"> <label for="filtroFecha">Fecha:</label>
+                <input type="date" id="filtroFecha">
+            </div>
+            
+            <div class="form-group filter-group"> <label for="filtroTipoIncidencia">Tipo de Incidencia:</label>
+                <select id="filtroTipoIncidencia">
+                    <option value="">Todos los Tipos</option>
+                    <option value="modulos">Módulos y Estanques</option>
+                    <option value="sensores">Sistemas de Sensores</option>
+                </select>
+            </div>
+
+            <div class="filter-buttons">
+                <button id="aplicarFiltrosBtn" class="filter-button">Aplicar Filtros</button>
+                <button id="resetFiltrosBtn" class="filter-button reset-button">Resetear Filtros</button>
+            </div>
+
+            <hr> <div class="download-buttons">
+                <h3>Descargar Reporte:</h3>
+                <button id="exportarExcelBtn" class="download-button excel-button">
+                    <i class="fas fa-file-excel"></i> Exportar a Excel (CSV)
+                </button>
+                <button id="downloadPdfButton" class="download-button pdf-button">
+                    <i class="fas fa-file-pdf"></i> Descargar PDF
+                </button>
+                <button id="downloadTxtButton" class="download-button txt-button">
+                    <i class="fas fa-file-alt"></i> Descargar TXT
+                </button>
+            </div>
+        </section>
+
+        <hr> <section id="incidenciasDisplaySection"> <h2>Incidencias Registradas</h2>
+            <div id="reporteContent" class="reporte-content-wrapper"> <div id="incidenciasReporteContainer" class="incidencias-grid">
+                    <p class="no-incidencias-message">No se encontraron incidencias con los filtros aplicados.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="report-actions-bottom"> <button id="eliminarReporteBtn" class="delete-button">
+                <i class="fas fa-trash-alt"></i> Eliminar Incidencias del Día
+            </button>
+            <button onclick="window.location.href='index.html'" class="back-button">
+                <i class="fas fa-arrow-circle-left"></i> Volver al Formulario
+            </button>
+        </div>
+    </div>
+
+    <script src="js/script-reporte.js"></script>
+</body>
+</html>
