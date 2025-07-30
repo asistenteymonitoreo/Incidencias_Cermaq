@@ -8,8 +8,7 @@
  */
 
 const {setGlobalOptions} = require("firebase-functions");
-const {onRequest} = require("firebase-functions/https");
-const logger = require("firebase-functions/logger");
+
 
 // For cost control, you can set the maximum number of containers that can be
 // running at the same time. This helps mitigate the impact of unexpected
@@ -21,8 +20,37 @@ const logger = require("firebase-functions/logger");
 // functions should each use functions.runWith({ maxInstances: 10 }) instead.
 // In the v1 API, each function can only serve one request per container, so
 // this will be the maximum concurrent request count.
-setGlobalOptions({ maxInstances: 10 });
+setGlobalOptions({maxInstances: 10});
+const functions = require("firebase-functions");
+const {BigQuery} = require("@google-cloud/bigquery");
+const bigquery = new BigQuery();
 
+exports.insertIncidenciaToBigQuery = functions.https.onRequest(
+    async (req, res) => {
+      try {
+        // Solo aceptar POST
+        if (req.method !== "POST") {
+          return res.status(405).send("Método no permitido");
+        }
+
+        const data = req.body;
+
+        // Ajusta el dataset y tabla a los tuyos
+        const datasetId = "TU_DATASET";
+        const tableId = "incidencias";
+
+        // Inserta la fila
+        await bigquery
+            .dataset(datasetId)
+            .table(tableId)
+            .insert([data]);
+
+        res.status(200).send("Incidencia insertada en BigQuery");
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Error al insertar en BigQuery");
+      }
+    });
 // Create and deploy your first functions
 // https://firebase.google.com/docs/functions/get-started
 

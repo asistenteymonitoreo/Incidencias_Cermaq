@@ -32,4 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Aquí podrías redirigir a una página para editar/eliminar perfiles
         });
     }
+
+    // Lógica para el botón Ver Reporte del Día
+    const reporteDiaBtn = document.getElementById('verReporteDiaBtn');
+    if (reporteDiaBtn) {
+        reporteDiaBtn.addEventListener('click', () => {
+            window.location.href = 'reporte.html';
+        });
+    }
 });

@@ -60,9 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
         reporteDiaBtn.addEventListener('click', () => {
             const today = new Date().toISOString().slice(0, 10);
             localStorage.setItem('fechaReporteActual', today);
-            window.location.href = 'reporte.html';
+            window.location.href = 'reporte.html'; // Corregido de reporte_v3.html a reporte.html
         });
     }
+
     if (cerrarSesionBtn) {
         cerrarSesionBtn.addEventListener('click', async () => {
             try {
@@ -122,10 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     function showSection(sectionElement) {
-        sectionElement.classList.remove('hidden');
+        if(sectionElement) sectionElement.classList.remove('hidden');
     }
     function hideSection(sectionElement) {
-        sectionElement.classList.add('hidden');
+        if(sectionElement) sectionElement.classList.add('hidden');
     }
     function setLocalDateTime() {
         const now = new Date();
@@ -133,12 +134,178 @@ document.addEventListener('DOMContentLoaded', function() {
         const localDateTime = new Date(now.getTime() - offset).toISOString().slice(0, 16);
         if (fechaHoraInput) fechaHoraInput.value = localDateTime;
     }
+    
     // Inicialización
     setLocalDateTime();
     loadData();
-    valorOxigenoInput.style.display = 'none';
-    valorTemperaturaInput.style.display = 'none';
-    valorTurbidezInput.style.display = 'none';
 
-    // Aquí puedes agregar el resto de la lógica de eventos y validaciones del formulario
+    // Listener para el cambio de centro
+    if (centroSelect) {
+        centroSelect.addEventListener('change', function() {
+            if (!centroSelect.value) {
+                // Si se deselecciona el centro, ocultar y resetear todo lo dependiente
+                hideSection(tipoIncidenciaSection);
+                hideSection(modulosEstanquesSection);
+                hideSection(sistemaSensoresSection);
+                hideSection(evaluacionRiesgosSection);
+
+                // Opcional: resetear selects y radios dependientes
+                document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+                document.querySelectorAll('select').forEach(s => {
+                    if (s !== centroSelect) s.selectedIndex = 0;
+                });
+            } else {
+                // Si hay centro seleccionado, mostrar la siguiente sección
+                showSection(tipoIncidenciaSection);
+            }
+        });
+    }
+    if(valorOxigenoInput) valorOxigenoInput.style.display = 'none';
+    if(valorTemperaturaInput) valorTemperaturaInput.style.display = 'none';
+    if(valorTurbidezInput) valorTurbidezInput.style.display = 'none';
+
+    // Listeners para tipo de incidencia
+    if (tipoIncidenciaRadios) {
+        tipoIncidenciaRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                const selectedCentroId = centroSelect.value;
+                if (this.value === 'parametros') {
+                    showSection(modulosEstanquesSection);
+                    hideSection(sistemaSensoresSection);
+                    if (selectedCentroId && appData.modulosEstanques[selectedCentroId]) {
+                        const modulosData = appData.modulosEstanques[selectedCentroId];
+                        const modulosArray = Object.keys(modulosData).map(nombre => ({ id: nombre, nombre: nombre }));
+                        populateSelect(moduloSelect, modulosArray, 'id', 'nombre');
+                    } else {
+                        moduloSelect.innerHTML = '<option value="">Seleccione un módulo</option>';
+                    }
+                    estanqueSelect.innerHTML = '<option value="">Seleccione un estanque</option>';
+                } else if (this.value === 'sensores') {
+                    hideSection(modulosEstanquesSection);
+                    showSection(sistemaSensoresSection);
+                    if (selectedCentroId && appData.sensoresPorCentro[selectedCentroId]) {
+                        populateSelect(sistemaSensorSelect, appData.sensoresPorCentro[selectedCentroId], 'id', 'nombre');
+                    } else {
+                        sistemaSensorSelect.innerHTML = '<option value="">Seleccione un sistema</option>';
+                    }
+                }
+            });
+        });
+    }
+
+    // Listener para el cambio de módulo
+    if (moduloSelect) {
+        moduloSelect.addEventListener('change', function() {
+            const selectedCentroId = centroSelect.value;
+            const selectedModuloId = this.value;
+            if (selectedCentroId && selectedModuloId && appData.modulosEstanques[selectedCentroId]) {
+                const estanquesData = appData.modulosEstanques[selectedCentroId][selectedModuloId];
+                if (estanquesData) {
+                    const estanquesArray = estanquesData.map(id => ({ id: id, nombre: id }));
+                    populateSelect(estanqueSelect, estanquesArray, 'id', 'nombre');
+                }
+            }
+        });
+    }
+
+    // Listener para el cambio de estanque
+    if (estanqueSelect) {
+        estanqueSelect.addEventListener('change', function() {
+            if (this.value) {
+                showSection(evaluacionRiesgosSection);
+            } else {
+                hideSection(evaluacionRiesgosSection);
+            }
+        });
+    }
+
+    // Función para manejar la visibilidad de los inputs de parámetros
+    function handleParameterChange(selectElement, inputElement) {
+        if (!selectElement || !inputElement) return;
+        selectElement.addEventListener('change', function() {
+            if (this.value === 'alta' || this.value === 'baja') {
+                inputElement.style.display = 'block';
+            } else {
+                inputElement.style.display = 'none';
+            }
+        });
+    }
+
+    // Listeners para los parámetros
+    handleParameterChange(oxigenoSelect, valorOxigenoInput);
+    handleParameterChange(temperaturaSelect, valorTemperaturaInput);
+    handleParameterChange(turbidezSelect, valorTurbidezInput);
+
+    // Listener para el envío del formulario
+    if (incidenciaForm) {
+        incidenciaForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            try {
+                const incidenciaData = {
+                    usuario: nombreUsuarioInput.value,
+                    fechaHora: fechaHoraInput.value,
+                    turno: document.getElementById('turno').value,
+                    centro: centroSelect.options[centroSelect.selectedIndex].text,
+                    tipoIncidencia: document.querySelector('input[name="tipoIncidencia"]:checked').value,
+                    creadoEn: new Date()
+                };
+
+                if (incidenciaData.tipoIncidencia === 'parametros') {
+                    incidenciaData.modulo = moduloSelect.value;
+                    incidenciaData.estanque = estanqueSelect.value;
+
+                    // Guardar parámetros solo si tienen un estado seleccionado
+                    if (oxigenoSelect.value) {
+                        incidenciaData.oxigeno = {
+                            estado: oxigenoSelect.value,
+                            valor: valorOxigenoInput.value
+                        };
+                    }
+                    if (temperaturaSelect.value) {
+                        incidenciaData.temperatura = {
+                            estado: temperaturaSelect.value,
+                            valor: valorTemperaturaInput.value
+                        };
+                    }
+                    if (turbidezSelect.value) {
+                        incidenciaData.turbidez = {
+                            estado: turbidezSelect.value,
+                            valor: valorTurbidezInput.value
+                        };
+                    }
+                } else if (incidenciaData.tipoIncidencia === 'sensores') {
+                    incidenciaData.sistemaSensor = sistemaSensorSelect.options[sistemaSensorSelect.selectedIndex].text;
+                    incidenciaData.sensorDetectado = sensorDetectadoSelect.options[sensorDetectadoSelect.selectedIndex].text;
+                    incidenciaData.estadoSensor = document.getElementById('estadoSensor').value;
+                }
+
+                // Datos de evaluación de riesgos
+                incidenciaData.tiempoResolucion = document.getElementById('tiempoResolucion').value;
+                incidenciaData.riesgoPeces = document.querySelector('input[name="riesgoPeces"]:checked').value;
+                incidenciaData.perdidaEconomica = document.querySelector('input[name="perdidaEconomica"]:checked').value;
+                incidenciaData.riesgoPersonas = document.querySelector('input[name="riesgoPersonas"]:checked').value;
+
+                // Manejar campo de observación
+                const observacionValue = document.getElementById('observacion').value.trim();
+                incidenciaData.observacion = observacionValue ? observacionValue : 'sin observaciones';
+
+                // Guardar en Firestore
+                await db.collection('incidencias').add(incidenciaData);
+
+                showMessage('Incidencia registrada con éxito.', 'success');
+                incidenciaForm.reset();
+                // Ocultar secciones después de enviar
+                hideSection(tipoIncidenciaSection);
+                hideSection(modulosEstanquesSection);
+                hideSection(sistemaSensoresSection);
+                hideSection(evaluacionRiesgosSection);
+
+            } catch (error) {
+                console.error('Error al registrar la incidencia:', error);
+                showMessage('Error al registrar la incidencia. Por favor, revisa todos los campos.', 'error');
+            }
+        });
+    }
+
 });
