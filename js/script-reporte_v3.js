@@ -183,6 +183,94 @@ document.addEventListener('DOMContentLoaded', () => {
         applyFiltersAndRender();
     });
 
+    // --- EXPORTACIÓN DE DATOS ---
+    // Exportar a CSV
+    exportarExcelBtn.addEventListener('click', () => {
+        console.log('Botón EXPORTAR CSV presionado');
+        if (!currentFilteredIncidencias.length) return alert('No hay datos para exportar.');
+        const headers = Object.keys(currentFilteredIncidencias[0]);
+        const csvRows = [headers.join(',')];
+        currentFilteredIncidencias.forEach(obj => {
+            csvRows.push(headers.map(h => '"'+(obj[h] !== undefined ? String(obj[h]).replace(/"/g, '""') : '')+'"').join(','));
+        });
+        const csvContent = csvRows.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'reporte_incidencias.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    // Exportar a TXT
+    downloadTxtButton.addEventListener('click', () => {
+        console.log('Botón DESCARGAR TXT presionado');
+        if (!currentFilteredIncidencias.length) return alert('No hay datos para exportar.');
+        let txt = '';
+        currentFilteredIncidencias.forEach((inc, i) => {
+            txt += `Incidencia #${i+1}\n`;
+            Object.entries(inc).forEach(([k,v]) => {
+                txt += `  ${k}: ${v}\n`;
+            });
+            txt += '\n';
+        });
+        const blob = new Blob([txt], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'reporte_incidencias.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    // Exportar a PDF (usando jsPDF)
+    // Función para descargar PDF visual (como en la web)
+    downloadPdfButton.addEventListener('click', async () => {
+        if (!currentFilteredIncidencias.length) {
+            alert('No hay datos para exportar.');
+            return;
+        }
+        downloadPdfButton.disabled = true;
+        downloadPdfButton.textContent = 'Generando PDF...';
+        const { jsPDF } = window.jspdf || window;
+        const reporteContent = document.getElementById('reporteContent');
+        const filtroFechaInput = document.getElementById('filtroFecha');
+        const filtroTipoIncidenciaSelect = document.getElementById('filtroTipoIncidencia');
+        try {
+            const canvas = await html2canvas(reporteContent, { scale: 2, useCORS: true });
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const imgWidth = 210;
+            const pageHeight = 297;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            // Nombre de archivo descriptivo
+            const fechaReporteNombre = filtroFechaInput.value || new Date().toLocaleDateString('es-CL', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+            const tipoReporteNombre = filtroTipoIncidenciaSelect.value || 'Todas';
+            pdf.save(`Reporte_Incidencias_Cermaq_${fechaReporteNombre}_${tipoReporteNombre}.pdf`);
+        } catch (error) {
+            console.error('Error al generar PDF:', error);
+            alert('Error al generar el PDF. Revise la consola para más detalles.');
+        } finally {
+            downloadPdfButton.disabled = false;
+            downloadPdfButton.textContent = 'Descargar PDF';
+        }
+    });
+
     // Inicialización de la página
     const initializeReportPage = async () => {
         await loadAppData();

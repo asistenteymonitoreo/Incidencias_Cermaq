@@ -295,6 +295,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 showMessage('Incidencia registrada con éxito.', 'success');
                 incidenciaForm.reset();
+                // Restaurar el nombre de usuario después de resetear el formulario
+                if (nombreUsuarioInput && localStorage.getItem('selectedProfileName')) {
+                    nombreUsuarioInput.value = localStorage.getItem('selectedProfileName');
+                    nombreUsuarioInput.readOnly = true;
+                }
                 // Ocultar secciones después de enviar
                 hideSection(tipoIncidenciaSection);
                 hideSection(modulosEstanquesSection);
